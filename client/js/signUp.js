@@ -3,27 +3,33 @@ $('#data-submit').click(function(event) {
 
     var username = $('#username').val();
     var password = $('#password').val();
+    var name = $('#name').val();
+    var lastName = $('#lastName').val();
+    var email = $('#email').val();
 
     var jsonString = {
         username: username,
-        password: password
+        password: password,
+        name: name,
+        lastName: lastName,
+        email: email
     };
 
     $.ajax({
-        url: "http://localhost:777/login",
+        url: "http://localhost:777/signUp",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(jsonString),
         success: function(response) {
-            if (response.msg === "Login successful") {
-                alert("Welcome, " + username);
-                window.location.href = "studentDB"; 
-            } else if (response.msg === "Please enter username and password") {
-                alert("Please enter username and password");
+            if (response.msg === "User registered successfully") {
+                alert("Username, " + username + " , registered successfully");
+                window.location.href = "login"; 
+            } else if (response.msg === "Username already exists") {
+                alert("Username already exists");
             } else if (response.msg === "Database error") {
                 alert("Database error");
-            } else if (response.msg === "Invalid username or password") {
-                alert("Invalid username or password");
+            } else if (response.msg === "Error inserting user") {
+                alert("Error inserting user");
             } else {
                 alert("Error: " + response.msg);
             }

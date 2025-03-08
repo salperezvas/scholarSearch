@@ -5,7 +5,7 @@
 
 form {
     width: 250px;
-    border: 5px solid #f0c7c7;
+    border: 5px solid #43453e;
     padding: 20px;
     background: #ffff;
     border-radius: 20px;
@@ -75,16 +75,5 @@ h1 {
 }
 
 body {
-    background: linear-gradient(to right, #82907a, #82907a, #bfe6f5);
-}
-
-.crab-container {
-    display: flex;
-    justify-content: center; 
-    margin-bottom: 20px;
-}
-
-.crab-logo {
-    width: 150px;
-    height: auto;
+    background: linear-gradient(to right, #bfe6f5, #82907a, #f4e9e6);
 }

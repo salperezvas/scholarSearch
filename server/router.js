@@ -17,6 +17,10 @@ var router = function(app) {
     app.get('/signUp', function(req, res) {
         res.status(200).sendFile(path.join(__dirname, '../client/signUp.html'));
     })
+
+    app.get('/crab.png', function(req, res) {
+        res.status(200).sendFile(path.join(__dirname, '../client/crab.png'));
+    })
 };
 
 module.exports = router;

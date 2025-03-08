@@ -34,6 +34,32 @@ var services = function(app) {
             }
         });
     });
+
+    app.post('/signUp', (req, res) => {
+        const { username, password, name, email, lastName } = req.body;
+
+        const checkUserSql = "SELECT * FROM students WHERE username = ?";
+    
+        connection.query(checkUserSql, [username], (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+    
+            if (results.length > 0) {
+                return res.status(200).json({ msg: "Username already exists" });
+            }
+    
+            const insertSql = "INSERT INTO students (name, lastName, email, username, password) VALUES (?, ?, ?, ?, ?)";
+    
+            connection.query(insertSql, [name, lastName, email, username, password], (err, result) => {
+                if (err) {
+                    return res.status(200).json({ msg: "Error inserting user", error: err });
+                }
+    
+                res.status(200).json({ msg: "User registered successfully", userId: result.insertId });
+            });
+        });
+    });
 };
 
 module.exports = services;

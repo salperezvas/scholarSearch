@@ -28,6 +28,13 @@ var services = function(app) {
             }
 
             if (results.length > 0) {
+                req.session.user = {
+                    id: results[0].id,
+                    username: results[0].username,
+                    name: results[0].name,
+                    email: results[0].email
+                };
+                
                 res.status(200).json({ msg: "Login successful", user: results[0] });
             } else {
                 res.status(200).json({ msg: "Invalid username or password" });

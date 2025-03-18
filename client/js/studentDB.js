@@ -24,7 +24,6 @@ function createLibraryTable(libraryData) {
         tableHTML += "<tr>";
 
         tableHTML += "<td>" + libraryData[i].bookId + "</td>";
-        // tableHTML += "<td>" + libraryData[i]._id + "</td>";  //If Mongo
 
         tableHTML += "<td>" + libraryData[i].bookTitle + "</td>";
         tableHTML += "<td>" + libraryData[i].author + "</td>";
@@ -34,7 +33,6 @@ function createLibraryTable(libraryData) {
         tableHTML += "<td>" 
                     +"<button class='btn btn-sm edit_btn delete-button' "
                     + "data-id='" + libraryData[i].ID 
-                    // + "data-id='" + libraryData[i]._id  //If Mongo 
                     + "'>DELETE</button>"
                     + "</td>";
         tableHTML += "</tr>";

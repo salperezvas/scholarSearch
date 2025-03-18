@@ -1,10 +1,18 @@
 const express = require('express');
+const session = require('express-session');
 const cors = require('cors');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 
 app.use(cors());
+
+app.use(session({
+  secret: 'key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -14,6 +22,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/client", express.static(path.resolve(__dirname, '../client')));
+
 
 //Make the server
 var port = 777;

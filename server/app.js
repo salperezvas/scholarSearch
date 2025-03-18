@@ -1,9 +1,10 @@
 const express = require('express');
-const session = require('express-session');
 const cors = require('cors');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+
+const session = require('express-session');
 
 app.use(cors());
 
@@ -11,7 +12,7 @@ app.use(session({
   secret: 'key',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: false }
 }));
 
 app.use((req, res, next) => {

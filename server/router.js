@@ -1,5 +1,13 @@
 const path = require('path');
 
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+
 //Page Listeners
 var router = function(app) {
     app.get('/', function(req, res) {
@@ -10,7 +18,7 @@ var router = function(app) {
         res.status(200).sendFile(path.join(__dirname, '../client/login.html'));
     })
 
-    app.get('/studentDB', function(req, res) {
+    app.get('/studentDB', isAuthenticated, function(req, res) {
         res.status(200).sendFile(path.join(__dirname, '../client/studentDB.html'));
     })
 

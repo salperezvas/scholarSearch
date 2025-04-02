@@ -67,6 +67,24 @@ var services = function(app) {
             });
         });
     });
+
+    app.get('/getUserData', (req, res) => {
+        if (req.session.user) {
+            res.status(200).json({ user: req.session.user });
+        } else {
+            res.status(200).json({ error: "Not authenticated" });
+        }
+    });
+
+    app.post('/signout', (req, res) => {
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(200).json({ success: false, error: "Could not sign out" });
+            }
+            res.clearCookie("connect.sid");
+            res.json({ success: true, message: "Signed out successfully" });
+        });
+    });
 };
 
 module.exports = services;

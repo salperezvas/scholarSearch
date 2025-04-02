@@ -1,62 +1,43 @@
-retrieveData();  //Get inital load
+$(document).ready(function() {
+    displayUserData();
+    logout();
+});
 
-var tableSorterActive = false;
-
-function retrieveData() {
-    //Retrieve the library data and populate on page load
-    // $.ajax({
-    //     url: ,
-    //     type:,
-    //     success: function(response){
-
-    //     },
-    //     error: function(err){
-    //         alert(err);
-    //     }
-    // });
+function displayUserData() {
+    $.ajax({
+        url: "/getUserData",
+        type: "GET",
+        success: function(response) {
+            console.log("User data:", response);
+            if (response.user) {
+                $("#welcome").text(`Welcome, ${response.user.name}`);
+            }
+        },
+        error: function( status, error) {
+            console.error("Error:", error, "Status:", status);
+        }
+    });
 }
 
-function createLibraryTable(libraryData) {
-    console.log(libraryData);
-
-    var tableHTML = "";
-    for(var i=0; i<libraryData.length; i++) {
-        tableHTML += "<tr>";
-
-        tableHTML += "<td>" + libraryData[i].bookId + "</td>";
-
-        tableHTML += "<td>" + libraryData[i].bookTitle + "</td>";
-        tableHTML += "<td>" + libraryData[i].author + "</td>";
-        tableHTML += "<td>" + libraryData[i].publisher + "</td>";
-        tableHTML += "<td>" + libraryData[i].yearPublished + "</td>";
-        tableHTML += "<td>" + libraryData[i].isbn + "</td>";
-        tableHTML += "<td>" 
-                    +"<button class='btn btn-sm edit_btn delete-button' "
-                    + "data-id='" + libraryData[i].ID 
-                    + "'>DELETE</button>"
-                    + "</td>";
-        tableHTML += "</tr>";
-    }
-
-    $("#libraryTable").html(tableHTML);
-    
-    activateDelete();
-}
-
-function activateDelete() {
-    $('.delete-button').click(function() {
+function logout() {
+    $("#signOut").click(function(e) {
+        e.preventDefault();
         
-        // $.ajax({
-        //     url: ,
-        //     type:,
-        //     data: ,
-        //     success: function(response){
-        //     },
-        //     error: function(err){
-        //         alert(err);
-        //     }
-        // });
-
+        $.ajax({
+            url: "/signout",
+            type: "POST",
+            success: function(response) {
+                if (response.success) {
+                    window.location.href = "/login";
+                } else {
+                    alert("Signout failed: " + (response.error));
+                }
+            },
+            error: function(status, error) {
+                console.error("Signout error:", status, error);
+                alert("Signout failed. Please check console for details.");
+            }
+        });
     });
 }
 

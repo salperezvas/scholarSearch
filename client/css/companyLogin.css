@@ -1,0 +1,90 @@
+*{
+    font-family: San Francisco;
+    box-sizing: padding-box;
+}
+
+form {
+    width: 250px;
+    border: 5px solid #f0c7c7;
+    padding: 20px;
+    background: #ffff;
+    border-radius: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #43453e;
+    margin-bottom: 40px;
+}
+
+h3 {
+    text-align: center;
+    color: #f4e9e6;
+    margin-bottom: 40px;
+}
+
+input {
+    display: block;
+    border: 2px solid #ccc;
+    width: 90%;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
+label {
+    color: #43453e;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.error {
+    background: #F2DEDE;
+    color: #0c0101;
+    padding: 10px;
+    width: 90%;
+    border-radius: 5px;
+    margin: 20px auto;
+}
+
+h1 {
+    text-align: center;
+    color: rgb(134, 3, 3);
+}
+
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #43453e;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    
+}
+
+.button1:hover {
+    background-color: #43453e;
+    color: white;
+}
+
+.center-form{
+    justify-content: center;
+    display: flex;
+    margin: 40px 50px;
+    padding: 30px;
+}
+
+body {
+    background: linear-gradient(to right, #bfe6f5, #82907a, #82907a);
+}
+
+.crab-container {
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 20px;
+}
+
+.crab-logo {
+    width: 150px;
+    height: auto;
+}

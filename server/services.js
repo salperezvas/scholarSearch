@@ -29,7 +29,36 @@ var services = function(app) {
 
             if (results.length > 0) {
                 req.session.user = {
-                    id: results[0].id,
+                    student_id: results[0].student_id,
+                    username: results[0].username,
+                    name: results[0].name,
+                    email: results[0].email
+                };
+                
+                res.status(200).json({ msg: "Login successful", user: results[0] });
+            } else {
+                res.status(200).json({ msg: "Invalid username or password" });
+            }
+        });
+    });
+
+    app.post('/companyLogin', (req, res) => {
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.status(200).json({ msg: "Please enter username and password" });
+        }
+
+        const sql = "SELECT * FROM Companies WHERE username = ? AND password = ?";
+
+        connection.query(sql, [username, password], (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            if (results.length > 0) {
+                req.session.user = {
+                    company_id: results[0].company_id,
                     username: results[0].username,
                     name: results[0].name,
                     email: results[0].email

@@ -10,14 +10,14 @@ $('#data-submit').click(function(event) {
     };
 
     $.ajax({
-        url: "http://localhost:777/companylogin",
+        url: "http://localhost:777/companyLogin",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(jsonString),
         success: function(response) {
             if (response.msg === "Login successful") {
                 alert("Welcome, " + username);
-                window.location.href = "studentDB"; 
+                window.location.href = "companyDB"; 
             } else if (response.msg === "Please enter username and password") {
                 alert("Please enter username and password");
             } else if (response.msg === "Database error") {

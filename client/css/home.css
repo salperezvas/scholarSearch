@@ -1,0 +1,48 @@
+*{
+    font-family: San Francisco;
+    box-sizing: padding-box;
+}
+
+b.big {
+    font-size: 40px
+}
+
+div.align-center {
+    text-align: center;
+}
+
+.center {
+    margin: auto;
+    width: 100%;
+    padding: 10px;    
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.fade1 {
+    width: 500px;
+    height: 300px; 
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.fade1:hover {opacity: 0.6}
+
+.fade2 {
+    width: 500px; 
+    height: 300px; 
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.fade2:hover {opacity: 0.6}
+
+.fade3 {
+    width: 500px;
+    height: 300px;
+    opacity: 1;
+}
+.fade3:hover {opacity: 0.6}

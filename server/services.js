@@ -127,6 +127,46 @@ var services = function(app) {
             res.status(200).json(results);
         });
     });
+
+    app.get('/showApprovedScholarships', (req, res) => {
+        const id = req.session.user.company_id;
+
+        const sql = "SELECT title, description, amount FROM Scholarships WHERE company_id = ? && status = 'approved'";
+        connection.query(sql, id, (err, results) => {
+            console.log(results);
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.get('/showRejectedScholarships', (req, res) => {
+        const id = req.session.user.company_id;
+
+        const sql = "SELECT title, description, amount FROM Scholarships WHERE company_id = ? && status = 'denied'";
+        connection.query(sql, id, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.get('/showPendingScholarships', (req, res) => {
+        const id = req.session.user.company_id;
+
+        const sql = "SELECT title, description, amount FROM Scholarships WHERE company_id = ? && status = 'pending'";
+        connection.query(sql, id, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
 };
 
 module.exports = services;

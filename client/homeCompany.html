@@ -56,7 +56,7 @@
                     <div class="tab-content" id="v-pills-tabContent">
                         <!-- HOME TAB -->
                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
-                          <nav >
+                          <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                               <button class="nav-link active" id="nav-activeScholarships-tab" data-bs-toggle="tab" data-bs-target="#nav-activeScholarships" type="button" role="tab" aria-controls="nav-activeScholarships" aria-selected="true">Active Scholarships</button>
                               <button class="nav-link" id="nav-pendingScholarships-tab" data-bs-toggle="tab" data-bs-target="#nav-pendingScholarships" type="button" role="tab" aria-controls="nav-pendingScholarships" aria-selected="false">Pending Scholarships</button>
@@ -67,41 +67,19 @@
                           <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-activeScholarships" role="tabpanel" aria-labelledby="nav-activeScholarships-tab" tabindex="0">
                               <div class="center">
-                                <div id="scholarshipContainer" class="grid-container">
-                                  <div id="activeScholarship" class="scholarship-card"></div>
-                                  <div id="activeScholarship1" class="scholarship-card"></div>
-                                  <div id="activeScholarship2" class="scholarship-card"></div>
-                                  <div id="activeScholarship3" class="scholarship-card"></div>
-                                  <div id="activeScholarship4" class="scholarship-card"></div>
-                                  <div id="activeScholarship5" class="scholarship-card"></div>
-                                  <div id="activeScholarship6" class="scholarship-card"></div>
-                                </div>
+                                <div id="activeScholarshipContainer" class="grid-container"></div>
                               </div>
                             </div>
                             <!-- PENDING SCHOLARSHIPS TAB -->
                             <div class="tab-pane fade" id="nav-pendingScholarships" role="tabpanel" aria-labelledby="nav-pendingScholarships-tab" tabindex="0">
                               <div class="center">
-                                <div id="scholarshipContainer" class="grid-container">
-                                  <div id="pendingScholarships1" class="scholarship-card"></div>
-                                  <div id="pendingScholarships2" class="scholarship-card"></div>
-                                  <div id="pendingScholarships3" class="scholarship-card"></div>
-                                  <div id="pendingScholarships4" class="scholarship-card"></div>
-                                  <div id="pendingScholarships5" class="scholarship-card"></div>
-                                  <div id="pendingScholarships6" class="scholarship-card"></div>
-                                </div>
+                                <div id="pendingScholarshipContainer" class="grid-container"></div>
                               </div>
                             </div>
                             <!-- REJECTED SCHOLARSHIPS TAB -->
                             <div class="tab-pane fade" id="nav-rejectedScholarships" role="tabpanel" aria-labelledby="nav-rejectedScholarships-tab" tabindex="0">
                               <div class="center">
-                                <div id="scholarshipContainer" class="grid-container">
-                                  <div id="rejectedScholarships1" class="scholarship-card"></div>
-                                  <div id="rejectedScholarships2" class="scholarship-card"></div>
-                                  <div id="rejectedScholarships3" class="scholarship-card"></div>
-                                  <div id="rejectedScholarships4" class="scholarship-card"></div>
-                                  <div id="rejectedScholarships5" class="scholarship-card"></div>
-                                  <div id="rejectedScholarships6" class="scholarship-card"></div>
-                                </div>
+                                <div id="rejectedScholarshipContainer" class="grid-container"></div>
                               </div>
                             </div>
                           </div>
@@ -109,7 +87,35 @@
                       
                         <!-- SCHOLARSHIPS TAB -->
                         <div class="tab-pane fade" id="v-pills-Scholarships" role="tabpanel" aria-labelledby="v-pills-Scholarships-tab" tabindex="0">
-                          <p>This is the separate Scholarships tab.</p>
+                          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
+                            <nav>
+                              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-uploadScholarships-tab" data-bs-toggle="tab" data-bs-target="#nav-uploadScholarships" type="button" role="tab" aria-controls="nav-uploadScholarships" aria-selected="true">Upload Scholarships</button>
+                                <button class="nav-link" id="nav-editScholarships-tab" data-bs-toggle="tab" data-bs-target="#nav-editScholarships" type="button" role="tab" aria-controls="nav-editScholarships" aria-selected="false">Edit Scholarships</button>
+                                <button class="nav-link" id="nav-allScholarships-tab" data-bs-toggle="tab" data-bs-target="#nav-allScholarships" type="button" role="tab" aria-controls="nav-allScholarships" aria-selected="false">All Scholarships</button>
+                              </div>
+                            </nav>
+                            <!-- Upload SCHOLARSHIPS TAB -->
+                            <div class="tab-content" id="nav-tabContent">
+                              <div class="tab-pane fade show active" id="nav-uploadScholarships" role="tabpanel" aria-labelledby="nav-uploadScholarships-tab" tabindex="0">
+                                <div class="center">
+                                  <div id="uploadScholarshipContainer" class="grid-container"></div>
+                                </div>
+                              </div>
+                              <!-- Edit SCHOLARSHIPS TAB -->
+                              <div class="tab-pane fade" id="nav-editScholarships" role="tabpanel" aria-labelledby="nav-editScholarships-tab" tabindex="0">
+                                <div class="center">
+                                  <div id="editScholarshipContainer" class="grid-container"></div>
+                                </div>
+                              </div>
+                              <!-- All SCHOLARSHIPS TAB -->
+                              <div class="tab-pane fade" id="nav-allScholarships" role="tabpanel" aria-labelledby="nav-allScholarships-tab" tabindex="0">
+                                <div class="center">
+                                  <div id="allScholarshipsContainer" class="grid-container"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       
                         <!-- MESSAGES TAB -->

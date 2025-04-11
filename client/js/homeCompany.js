@@ -4,6 +4,7 @@ $(document).ready(function() {
     showApprovedScholarships();
     showRejectedScholarships();
     showPendingScholarships();
+    deleteScholarship();
 });
 
 function displayUserData() {
@@ -50,14 +51,18 @@ function showApprovedScholarships() {
         type: "GET",
         success: function(response) {
             console.log("scholarship:", response);
+            const container = $("#activeScholarshipContainer");
+            container.empty();
             response.forEach((scholarship, index) => {
-                const elementId = `#activeScholarship${index + 1}`;
-                $(elementId).html(`
-                    <h3>${scholarship.title}</h3>
-                    <h4>$${scholarship.amount}</h4>
-                    <p>${scholarship.description}</p>
-                    <button class="btn btn-primary" id="deleteApprovedScholarship${index + 1}">Delete</button>
+                const card = $(`
+                    <div class="scholarship-card">
+                        <h3>${scholarship.title}</h3>
+                        <h4>$${scholarship.amount}</h4>
+                        <p>${scholarship.description}</p>
+                        <button class="btn btn-danger delete-scholarship" data-id="${scholarship.scholarship_id}">Delete</button>
+                    </div>
                 `);
+                container.append(card);
             });
         },
         error: function( error) {
@@ -72,14 +77,18 @@ function showRejectedScholarships() {
         type: "GET",
         success: function(response) {
             console.log("scholarship:", response);
+            const container = $("#rejectedScholarshipContainer");
+            container.empty();
             response.forEach((scholarship, index) => {
-                const elementId = `#rejectedScholarships${index + 1}`;
-                $(elementId).html(`
-                    <h3>${scholarship.title}</h3>
-                    <h4>$${scholarship.amount}</h4>
-                    <p>${scholarship.description}</p>
-                    <button class="btn btn-primary" id="deleteRejectedScholarship${index + 1}">Delete</button>
+                const card = $(`
+                    <div class="scholarship-card">
+                        <h3>${scholarship.title}</h3>
+                        <h4>$${scholarship.amount}</h4>
+                        <p>${scholarship.description}</p>
+                        <button class="btn btn-danger delete-scholarship" data-id="${scholarship.scholarship_id}">Delete</button>
+                    </div>
                 `);
+                container.append(card);
             });
         },
         error: function( error) {
@@ -94,18 +103,44 @@ function showPendingScholarships() {
         type: "GET",
         success: function(response) {
             console.log("scholarship:", response);
+            const container = $("#pendingScholarshipContainer");
+            container.empty();
             response.forEach((scholarship, index) => {
-                const elementId = `#pendingScholarships${index + 1}`;
-                $(elementId).html(`
-                    <h3>${scholarship.title}</h3>
-                    <h4>$${scholarship.amount}</h4>
-                    <p>${scholarship.description}</p>
-                    <button class="btn btn-primary" id="deletePendingScholarship${index + 1}">Delete</button>
+                const card = $(`
+                    <div class="scholarship-card">
+                        <h3>${scholarship.title}</h3>
+                        <h4>$${scholarship.amount}</h4>
+                        <p>${scholarship.description}</p>
+                        <button class="btn btn-danger delete-scholarship" data-id="${scholarship.scholarship_id}">Delete</button>
+                    </div>
                 `);
+                container.append(card);
             });
         },
         error: function( error) {
             console.error("Error:", error);
+        }
+    });
+}
+
+function deleteScholarship() {
+    $(document).on("click", ".delete-scholarship", function () {
+        const scholarshipId = $(this).data("id");
+
+        if (confirm("Are you sure you want to delete this scholarship?")) {
+            $.ajax({
+                url: `/deleteScholarship/${scholarshipId}`,
+                type: "DELETE",
+                success: function (response) {
+                    alert(response.msg);
+                    showRejectedScholarships();
+                    showPendingScholarships();
+                    showApprovedScholarships();
+                },
+                error: function (error) {
+                    console.error("Error:", error);
+                }
+            });
         }
     });
 }

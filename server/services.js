@@ -131,9 +131,8 @@ var services = function(app) {
     app.get('/showApprovedScholarships', (req, res) => {
         const id = req.session.user.company_id;
 
-        const sql = "SELECT title, description, amount FROM Scholarships WHERE company_id = ? && status = 'approved'";
+        const sql = "SELECT title, description, amount, scholarship_id FROM Scholarships WHERE company_id = ? AND status = 'approved'";
         connection.query(sql, id, (err, results) => {
-            console.log(results);
             if (err) {
                 return res.status(200).json({ msg: "Database error", error: err });
             }
@@ -145,7 +144,7 @@ var services = function(app) {
     app.get('/showRejectedScholarships', (req, res) => {
         const id = req.session.user.company_id;
 
-        const sql = "SELECT title, description, amount FROM Scholarships WHERE company_id = ? && status = 'denied'";
+        const sql = "SELECT title, description, scholarship_id, amount FROM Scholarships WHERE company_id = ? AND status = 'denied'";
         connection.query(sql, id, (err, results) => {
             if (err) {
                 return res.status(200).json({ msg: "Database error", error: err });
@@ -158,13 +157,27 @@ var services = function(app) {
     app.get('/showPendingScholarships', (req, res) => {
         const id = req.session.user.company_id;
 
-        const sql = "SELECT title, description, amount FROM Scholarships WHERE company_id = ? && status = 'pending'";
+        const sql = "SELECT title, description, scholarship_id, amount FROM Scholarships WHERE company_id = ? AND status = 'pending'";
         connection.query(sql, id, (err, results) => {
             if (err) {
                 return res.status(200).json({ msg: "Database error", error: err });
             }
 
             res.status(200).json(results);
+        });
+    });
+
+    app.delete('/deleteScholarship/:id', (req, res) => {
+        const scholarshipId = req.params.id;
+        const sql = "DELETE FROM Scholarships WHERE scholarship_id = ?";
+        
+        console.log(scholarshipId);
+        connection.query(sql, [scholarshipId], (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            res.status(200).json({ msg: "Scholarship deleted successfully" });
         });
     });
 };

@@ -34,6 +34,10 @@ var router = function(app) {
         res.status(200).sendFile(path.join(__dirname, '../client/home.html'));
     })
 
+    app.get('/homeCompany', isAuthenticated, function(req, res) {
+        res.status(200).sendFile(path.join(__dirname, '../client/homeCompany.html'));
+    })
+
     app.get('/settings', isAuthenticated, function(req, res) {
         res.status(200).sendFile(path.join(__dirname, '../client/settings.html'));
     })

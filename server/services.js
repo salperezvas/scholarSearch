@@ -114,6 +114,19 @@ var services = function(app) {
             res.json({ success: true, message: "Signed out successfully" });
         });
     });
+
+    app.get('/showScholarships', (req, res) => {
+
+        const sql = "SELECT title, description, amount FROM Scholarships ORDER BY RAND() LIMIT 9";
+
+        connection.query(sql, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
 };
 
 module.exports = services;

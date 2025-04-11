@@ -17,6 +17,11 @@ div.align-center {
     padding: 10px;    
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
 .fade1 {
     width: 500px;
     height: 300px; 
@@ -44,8 +49,8 @@ div.align-center {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 75px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
     padding: 20px;
 }
 
@@ -60,5 +65,5 @@ div.align-center {
 }
 
 .scholarship-card:hover {
-    transform: scale(1.25);
+    transform: scale(1.02);
 }

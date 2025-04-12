@@ -5,6 +5,8 @@ $(document).ready(function() {
     showRejectedScholarships();
     showPendingScholarships();
     deleteScholarship();
+    showAllScholarships();
+    uploadScholarships();
 });
 
 function displayUserData() {
@@ -136,11 +138,82 @@ function deleteScholarship() {
                     showRejectedScholarships();
                     showPendingScholarships();
                     showApprovedScholarships();
+                    showAllScholarships();
                 },
                 error: function (error) {
                     console.error("Error:", error);
                 }
             });
         }
+    });
+}
+
+function showAllScholarships() {
+    $.ajax({
+        url: "/showAllScholarships",
+        type: "GET",
+        success: function(response) {
+            console.log("scholarship:", response);
+            const container = $("#allScholarshipsContainer");
+            container.empty();
+            response.forEach((scholarship, index) => {
+                const card = $(`
+                    <div class="scholarship-card">
+                        <h3>${scholarship.title}</h3>
+                        <h4>$${scholarship.amount}</h4>
+                        <p>${scholarship.description}</p>
+                        <button class="btn btn-danger delete-scholarship" data-id="${scholarship.scholarship_id}">Delete</button>
+                    </div>
+                `);
+                container.append(card);
+            });
+        },
+        error: function( error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
+function uploadScholarships() {
+    $("#data-submit").click(function(e) {
+        e.preventDefault();
+
+        if (!this.checkValidity()) {
+            this.reportValidity();
+            return;
+        }
+        
+        var title = $("#title").val();
+        var description = $("#description").val();
+        var amount = $("#amount").val();
+        var deadline = $("#deadline").val();
+
+        var jsonString = {
+            title: title,
+            description: description,
+            amount: amount,
+            deadline: deadline
+        };
+
+        $.ajax({
+            url: "/uploadScholarships",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(jsonString),
+            success: function(response) {
+                if (response.msg === "Scholarship uploaded successfully") {
+                    alert("Scholarship uploaded successfully");
+                    $("#uploadScholarshipForm")[0].reset();
+                    showPendingScholarships();
+                    showAllScholarships();
+                } else {
+                    alert("Error uploading scholarship missing data");
+                }
+            },
+            error: function(err) {
+                alert("An error occurred. Please try again.");
+                console.error("Error:", err);
+            }
+        });
     });
 }

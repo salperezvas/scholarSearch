@@ -117,7 +117,7 @@ var services = function(app) {
 
     app.get('/showScholarships', (req, res) => {
 
-        const sql = "SELECT title, description, amount FROM Scholarships ORDER BY RAND() LIMIT 9";
+        const sql = "SELECT title, description, amount FROM Scholarships ORDER BY RAND() LIMIT 9 && status = 'approved'";
 
         connection.query(sql, (err, results) => {
             if (err) {
@@ -158,7 +158,7 @@ var services = function(app) {
         const id = req.session.user.company_id;
 
         const sql = "SELECT title, description, scholarship_id, amount FROM Scholarships WHERE company_id = ? AND status = 'pending'";
-        connection.query(sql, id, (err, results) => {
+        connection.query(sql, [id], (err, results) => {
             if (err) {
                 return res.status(200).json({ msg: "Database error", error: err });
             }
@@ -171,13 +171,41 @@ var services = function(app) {
         const scholarshipId = req.params.id;
         const sql = "DELETE FROM Scholarships WHERE scholarship_id = ?";
         
-        console.log(scholarshipId);
         connection.query(sql, [scholarshipId], (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(200).json({ msg: "Database error", error: err });
             }
             res.status(200).json({ msg: "Scholarship deleted successfully" });
+        });
+    });
+
+    app.get('/showAllScholarships', (req, res) => {
+
+        const id = req.session.user.company_id;
+
+        const sql = "SELECT title, description, amount, scholarship_id FROM Scholarships WHERE company_id = ?";
+        connection.query(sql, [id], (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.post('/uploadScholarships', (req, res) => {
+        const { title, description, amount, deadline } = req.body;
+        const id = req.session.user.company_id;
+
+        const sql = "INSERT INTO Scholarships (title, description, amount, deadline, company_id, status) VALUES (?, ?, ?, ?, ?, 'pending')";
+        
+        connection.query(sql, [title, description, amount, deadline, id], (err, result) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json({ msg: "Scholarship uploaded successfully" });
         });
     });
 };

@@ -123,7 +123,7 @@ var services = function(app) {
 
     app.get('/showScholarships', (req, res) => {
 
-        const sql = "SELECT title, description, amount FROM Scholarships WHERE status = 'approved' ORDER BY RAND() LIMIT 9";
+        const sql = "SELECT title, description, scholarship_id, amount FROM Scholarships WHERE status = 'approved' ORDER BY RAND() LIMIT 9";
 
         connection.query(sql, (err, results) => {
             if (err) {
@@ -212,6 +212,39 @@ var services = function(app) {
             }
 
             res.status(200).json({ msg: "Scholarship uploaded successfully"});
+        });
+    });
+
+    app.get('/searchScholarship', (req, res) => {
+        const title = req.query.title;
+
+        const sql = "SELECT title, description, amount, scholarship_id FROM Scholarships WHERE title LIKE ? OR description LIKE ? AND status = 'approved'";
+        
+        const likeTitle = `%${title}%`;
+
+        connection.query(sql, [likeTitle, likeTitle], (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.post('/applyScholarship/:id', (req, res) => {
+        const scholarshipId = req.params.id;
+        const studentId = req.session.user.student_id;
+
+        const sql = "INSERT INTO Applications (student_id, scholarship_id) VALUES (?, ?)";
+        console.log("studentId:", studentId);
+        console.log("scholarshipId:", scholarshipId);
+        
+        connection.query(sql, [studentId, scholarshipId], (err, result) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            console.log("result:", result);
+            res.status(200).json({ msg: "Application submitted successfully" });
         });
     });
 };

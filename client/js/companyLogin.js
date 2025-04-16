@@ -15,7 +15,10 @@ $('#data-submit').click(function(event) {
         contentType: "application/json",
         data: JSON.stringify(jsonString),
         success: function(response) {
-            if (response.msg === "Login successful") {
+            if(response.msg === "Admin Login successful") {
+                alert("Welcome Admin, " + username);
+                window.location.href = "adminDB"; 
+            } else if (response.msg === "Login successful") {
                 alert("Welcome, " + username);
                 window.location.href = "companyDB"; 
             } else if (response.msg === "Please enter username and password") {

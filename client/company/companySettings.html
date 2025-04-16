@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student Dashboard</title>
+    <title>Settings</title>
 
-    <link rel="stylesheet" type="text/css" href="/client/css/companyDB.css">
+    <link rel="stylesheet" type="text/css" href="/client/css/settings.css">
 
     <script src="/client/js/config.js"></script>
-    <script src='/client/js/companyDB.js' async></script>
+    <script src='/client/js/settings.js' async></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -34,10 +34,10 @@
                             <a class="nav-link" aria-current="page" href="homeCompany">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="settings">Settings</a>
+                            <a class="nav-link" href="companySettings">Settings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="signOut"> Logout</a>
+                            <a class="nav-link" href="companyLogin"> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -47,9 +47,18 @@
     <div class="align-center">
             <br><br><br>
             <div class="center">
-                <br>
-                <div class="grid-container">
-                </div>
+                <div class="d-flex align-items-start">
+                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                      <button class="nav-link active" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="true">Settings</button>
+                      <button class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="false">Account</button>
+                      <button class="nav-link" id="v-pills-deleteAccount-tab" data-bs-toggle="pill" data-bs-target="#v-pills-deleteAccount" type="button" role="tab" aria-controls="v-pills-deleteAccount" aria-selected="false">Delete Account</button>
+                    </div>
+                    <div class="tab-content" id="v-pills-tabContent">
+                      <div class="tab-pane fade show active" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">...</div>
+                      <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab" tabindex="0">...</div>
+                      <div class="tab-pane fade" id="v-pills-deleteAccount" role="tabpanel" aria-labelledby="v-pills-deleteAccount-tab" tabindex="0">...</div>
+                    </div>
+                  </div>
             </div>    
             <br><br><br><br><br><br><br>
             <div class="callout">© 2025 ScholarSearch</div>

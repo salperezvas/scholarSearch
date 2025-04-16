@@ -19,7 +19,7 @@ var router = function(app) {
     })
 
     app.get('/studentDB', isAuthenticated, function(req, res) {
-        res.status(200).sendFile(path.join(__dirname, '../client/studentDB.html'));
+        res.status(200).sendFile(path.join(__dirname, '../client/student/studentDB.html'));
     })
 
     app.get('/signUp', function(req, res) {
@@ -31,15 +31,19 @@ var router = function(app) {
     })
 
     app.get('/home', isAuthenticated, function(req, res) {
-        res.status(200).sendFile(path.join(__dirname, '../client/home.html'));
+        res.status(200).sendFile(path.join(__dirname, '../client/student/home.html'));
     })
 
     app.get('/homeCompany', isAuthenticated, function(req, res) {
-        res.status(200).sendFile(path.join(__dirname, '../client/homeCompany.html'));
+        res.status(200).sendFile(path.join(__dirname, '../client/company/homeCompany.html'));
     })
 
     app.get('/settings', isAuthenticated, function(req, res) {
-        res.status(200).sendFile(path.join(__dirname, '../client/settings.html'));
+        res.status(200).sendFile(path.join(__dirname, '../client/student/settings.html'));
+    })
+
+    app.get('/companySettings', isAuthenticated, function(req, res) {
+        res.status(200).sendFile(path.join(__dirname, '../client/company/companySettings.html'));
     })
 
     app.get('/companyLogin', function(req, res) {
@@ -47,8 +51,13 @@ var router = function(app) {
     })
 
     app.get('/companyDB', isAuthenticated, function(req, res) {
-        res.status(200).sendFile(path.join(__dirname, '../client/companyDB.html'));
+        res.status(200).sendFile(path.join(__dirname, '../client/company/companyDB.html'));
     })
+
+    app.get('/adminDB', isAuthenticated, function(req, res) {
+        res.status(200).sendFile(path.join(__dirname, '../client/admin/adminDB.html'));
+    })
+
 };
 
 module.exports = router;

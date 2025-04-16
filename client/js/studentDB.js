@@ -62,3 +62,15 @@ function showScholarships() {
         }
     });
 }
+
+function searchScholarship() {
+    const searchValue = $("#searchScholarship").val().toLowerCase();
+    $(".scholarship").each(function() {
+        const title = $(this).find("h3").text().toLowerCase();
+        if (title.includes(searchValue)) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}

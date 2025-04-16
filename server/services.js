@@ -1,4 +1,5 @@
 const mysql = require('mysql2');
+const adminIds = [1];
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -63,8 +64,13 @@ var services = function(app) {
                     name: results[0].name,
                     email: results[0].email
                 };
-                
-                res.status(200).json({ msg: "Login successful", user: results[0] });
+
+                if (req.session.user && adminIds.includes(req.session.user.company_id)) {
+                    res.status(200).json({ msg: "Admin Login successful", user: results[0] });
+                }
+                else{
+                    res.status(200).json({ msg: "Login successful", user: results[0] });
+                }
             } else {
                 res.status(200).json({ msg: "Invalid username or password" });
             }
@@ -117,7 +123,7 @@ var services = function(app) {
 
     app.get('/showScholarships', (req, res) => {
 
-        const sql = "SELECT title, description, amount FROM Scholarships ORDER BY RAND() LIMIT 9 && status = 'approved'";
+        const sql = "SELECT title, description, amount FROM Scholarships WHERE status = 'approved' ORDER BY RAND() LIMIT 9";
 
         connection.query(sql, (err, results) => {
             if (err) {
@@ -205,7 +211,7 @@ var services = function(app) {
                 return res.status(200).json({ msg: "Database error", error: err });
             }
 
-            res.status(200).json({ msg: "Scholarship uploaded successfully" });
+            res.status(200).json({ msg: "Scholarship uploaded successfully"});
         });
     });
 };

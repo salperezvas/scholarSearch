@@ -58,6 +58,14 @@ var router = function(app) {
         res.status(200).sendFile(path.join(__dirname, '../client/admin/adminDB.html'));
     })
 
+    app.get('/adminSettings', isAuthenticated, function(req, res) {
+        res.status(200).sendFile(path.join(__dirname, '../client/admin/adminSettings.html'));
+    })
+
+    app.get('/homeAdmin', isAuthenticated, function(req, res) {
+        res.status(200).sendFile(path.join(__dirname, '../client/admin/homeAdmin.html'));
+    })
+
 };
 
 module.exports = router;

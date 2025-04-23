@@ -247,6 +247,81 @@ var services = function(app) {
             res.status(200).json({ msg: "Application submitted successfully" });
         });
     });
+
+    app.get('/showStudentAccounts', (req, res) => {
+
+        const sql = "SELECT * FROM Students";
+        connection.query(sql, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.get('/showCompanyAccount', (req, res) => {
+
+        const sql = "SELECT * FROM Companies";
+        connection.query(sql, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.delete('/deleteAccount/:id', (req, res) => {
+        const accountId = req.params.id;
+        const sql = "DELETE FROM Students WHERE student_id = ?";
+        
+        connection.query(sql, [accountId], (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            res.status(200).json({ msg: "Account deleted successfully" });
+        });
+    });
+
+    app.delete('/deleteCopmanyAccount/:id', (req, res) => {
+        const accountId = req.params.id;
+        const sql = "DELETE FROM Companies WHERE company_id = ?";
+        
+        connection.query(sql, [accountId], (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            res.status(200).json({ msg: "Account deleted successfully" });
+        });
+    });
+
+    app.get('/showStudentAccounts', (req, res) => {
+
+        const sql = "SELECT * FROM Students";
+        connection.query(sql, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.get('/showEveryScholarships', (req, res) => {
+
+        const sql = "SELECT * FROM Scholarships";
+        connection.query(sql, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
 };
 
 module.exports = services;

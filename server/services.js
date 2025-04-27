@@ -322,6 +322,102 @@ var services = function(app) {
         });
     });
 
+    app.get('/scholarshipPending', (req, res) => {
+
+        const sql = "SELECT * FROM Scholarships WHERE status = 'pending'";
+        connection.query(sql, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.get('/rejectedScholarships', (req, res) => {
+
+        const sql = "SELECT * FROM Scholarships WHERE status = 'denied'";
+        connection.query(sql, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.post('/rejectScholarship/:id', (req, res) => {
+        const scholarshipId = req.params.id;
+
+        const sql = "UPDATE Scholarships SET `status` = 'denied' WHERE (`scholarship_id` = ?);";
+        console.log("scholarshipId:", scholarshipId);
+        
+        connection.query(sql, [scholarshipId], (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            res.status(200).json({ msg: "Scholarship rejected successfully" });
+        });
+    });
+
+    app.post('/approveScholarship/:id', (req, res) => {
+        const scholarshipId = req.params.id;
+
+        const sql = "UPDATE Scholarships SET `status` = 'approved' WHERE (`scholarship_id` = ?);";
+        console.log("scholarshipId:", scholarshipId);
+        
+        connection.query(sql, [scholarshipId], (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            res.status(200).json({ msg: "Scholarship approved successfully" });
+        });
+    });
+
+    app.get('/accountPending', (req, res) => {
+
+        const sql = "SELECT * FROM Students WHERE company_request_status = 'requested'";
+        connection.query(sql, (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            res.status(200).json(results);
+        });
+    });
+
+    app.post('/rejectAccount/:id', (req, res) => {
+        const scholarshipId = req.params.id;
+
+        const sql = "UPDATE Students SET `company_request_status` = 'denied' WHERE (`student_id` = ?);";
+        console.log("scholarshipId:", scholarshipId);
+        
+        connection.query(sql, [scholarshipId], (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            res.status(200).json({ msg: "Account rejected successfully" });
+        });
+    });
+
+    app.post('/approveAccount/:id', (req, res) => {
+        const scholarshipId = req.params.id;
+
+        const sql = "UPDATE Students SET `company_request_status` = 'approved' WHERE (`student_id` = ?);";
+        console.log("scholarshipId:", scholarshipId);
+        
+        connection.query(sql, [scholarshipId], (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            res.status(200).json({ msg: "Account approved successfully" });
+        });
+    });
+
 };
 
 module.exports = services;

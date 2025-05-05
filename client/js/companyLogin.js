@@ -17,10 +17,10 @@ $('#data-submit').click(function(event) {
         success: function(response) {
             if(response.msg === "Admin Login successful") {
                 alert("Welcome Admin, " + username);
-                window.location.href = "adminDB"; 
+                window.location.href = "homeAdmin"; 
             } else if (response.msg === "Login successful") {
                 alert("Welcome, " + username);
-                window.location.href = "companyDB"; 
+                window.location.href = "homeCompany"; 
             } else if (response.msg === "Please enter username and password") {
                 alert("Please enter username and password");
             } else if (response.msg === "Database error") {

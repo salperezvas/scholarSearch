@@ -123,8 +123,7 @@ var services = function(app) {
 
     app.get('/showScholarships', (req, res) => {
 
-        const sql = "SELECT title, description, scholarship_id, amount FROM Scholarships WHERE status = 'approved' ORDER BY RAND() LIMIT 9";
-
+        const sql = "SELECT * FROM Scholarships";
         connection.query(sql, (err, results) => {
             if (err) {
                 return res.status(200).json({ msg: "Database error", error: err });
@@ -415,6 +414,95 @@ var services = function(app) {
                 return res.status(200).json({ msg: "Database error", error: err });
             }
             res.status(200).json({ msg: "Account approved successfully" });
+        });
+    });
+
+    app.get('/showAppliedScholarships', (req, res) => {
+
+        const id = req.session.user.student_id;
+
+        const sql = "SELECT * FROM Applications WHERE student_id = ?";
+        connection.query(sql, [id], (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            const scholarshipIDs = [];
+            results.forEach(result => {
+                scholarshipIDs.push(result.application_id);
+            });
+
+            if (scholarshipIDs.length == 0) {
+                return res.status(200).json([]);
+            }
+            
+            const sql2 = "SELECT * FROM Scholarships WHERE scholarship_id IN (?)";
+            connection.query(sql2, [scholarshipIDs], (err, results) => {
+                if (err) {
+                    return res.status(200).json({ msg: "Database error", error: err });
+                }
+                res.status(200).json(results);
+            });
+        });
+    });
+
+    app.post('/saveScholarship/:id', (req, res) => {
+        const scholarshipId = req.params.id;
+        const studentId = req.session.user.student_id;
+
+        const sql = "INSERT INTO SavedScholarships (`application_id`, `student_id`) VALUES (?, ?);;";
+        console.log("studentId:", studentId);
+        console.log("scholarshipId:", scholarshipId);
+        
+        connection.query(sql, [scholarshipId, studentId], (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            console.log("result:", result);
+            res.status(200).json({ msg: "Scholarship saved successfully" });
+        });
+    });
+
+    app.get('/showSavedScholarships', (req, res) => {
+        const id = req.session.user.student_id;
+
+        const sql = "SELECT * FROM SavedScholarships WHERE student_id = ?";
+        connection.query(sql, [id], (err, results) => {
+            if (err) {
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+
+            const scholarshipIDs = [];
+            results.forEach(result => {
+                scholarshipIDs.push(result.application_id);
+            });
+
+            if (scholarshipIDs.length == 0) {
+                return res.status(200).json([]);
+            }
+            
+            const sql2 = "SELECT * FROM Scholarships WHERE scholarship_id IN (?)";
+            connection.query(sql2, [scholarshipIDs], (err, results) => {
+                if (err) {
+                    return res.status(200).json({ msg: "Database error", error: err });
+                }
+                res.status(200).json(results);
+            });
+        });
+    });
+
+    app.post('/reportScholarship/:id', (req, res) => {
+        const scholarshipId = req.params.id;
+        const sql = "INSERT INTO Reports (`scholarship_id`) VALUES (?);;";
+        
+        connection.query(sql, [scholarshipId], (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(200).json({ msg: "Database error", error: err });
+            }
+            console.log("result:", result);
+            res.status(200).json({ msg: "Scholarship reported successfully" });
         });
     });
 

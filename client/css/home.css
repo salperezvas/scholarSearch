@@ -17,11 +17,6 @@ div.align-center {
     padding: 10px;    
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
-
 .fade1 {
     width: 500px;
     height: 300px; 
@@ -46,3 +41,26 @@ div.align-center {
     opacity: 1;
 }
 .fade3:hover {opacity: 0.6}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.scholarship-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.scholarship-card:hover {
+    transform: scale(1.02);
+}

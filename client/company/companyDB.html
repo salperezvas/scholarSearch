@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student Dashboard</title>
+    <title>Company Dashboard</title>
 
-    <link rel="stylesheet" type="text/css" href="/client/css/companyDB.css">
+    <link rel="stylesheet" type="text/css" href="/client/css/studentDB.css">
 
     <script src="/client/js/config.js"></script>
     <script src='/client/js/companyDB.js' async></script>
@@ -18,8 +18,8 @@
 <body class="p-3 m-0 border-0 bd-example">
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-            <img src="crab.png" width="auto" height="75" href="companyDB">
-            <a class="navbar-brand" href="companyDB">ScholarSearch</a>
+            <img src="crab.png" width="auto" height="75" href="homeCompany">
+            <a class="navbar-brand" href="homeCompany">ScholarSearch</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -45,14 +45,28 @@
         </div>
     </nav>
     <div class="align-center">
+            <br>
+            <form class="d-flex mt-3" role="search">
+                <input class="form-control me-2" type="search" id="title" placeholder="Type here to look up a Scholarship" aria-label="Search">
+                <button class="btn btn-success" type="submit" id="search">Search</button>
+            </form>
             <br><br><br>
             <div class="center">
-                <br>
-                <div class="scholarshipContainer">
+                <div id="scholarshipContainer" class="grid-container">
+                    <div id="scholarship1" class="scholarship-card"></div>
+                    <div id="scholarship2" class="scholarship-card"></div>
+                    <div id="scholarship3" class="scholarship-card"></div>
+                    <div id="scholarship4" class="scholarship-card"></div>
+                    <div id="scholarship5" class="scholarship-card"></div>
+                    <div id="scholarship6" class="scholarship-card"></div>
+                    <div id="scholarship7" class="scholarship-card"></div>
+                    <div id="scholarship8" class="scholarship-card"></div>
+                    <div id="scholarship9" class="scholarship-card"></div>
                 </div>
             </div>    
-            <br><br><br><br><br><br><br>
+            <button class="btn btn-secondary" id="clearSearch">Clear</button>
+            <br><br><br>
             <div class="callout">© 2025 ScholarSearch</div>
     </div>
-</body>
+</body> 
 </html>

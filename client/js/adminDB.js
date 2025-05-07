@@ -3,10 +3,7 @@ $(document).ready(function() {
     logout();
     showScholarships();
     searchScholarships();
-    applyScholarship();
     clearSearch();
-    saveScholarship();
-    reportScholarship();
 });
 
 function displayUserData() {
@@ -61,9 +58,6 @@ function showScholarships() {
                         <h3>${scholarship.title}</h3>
                         <h4>$${scholarship.amount}</h4>
                         <p>${scholarship.description}</p>
-                        <button class="btn btn-warning save-scholarship" data-id="${scholarship.scholarship_id}">Save</button>
-                        <button class="btn btn-success apply-scholarship" data-id="${scholarship.scholarship_id}">Apply</button>
-                        <button class="btn btn-danger report-scholarship" data-id="${scholarship.scholarship_id}">Report</button>
                     </div>
                 `);
                 container.append(card);
@@ -116,66 +110,6 @@ function searchScholarships() {
                 console.error("Error:", err);
             }
         });
-    });
-}
-
-function applyScholarship() {
-    $(document).on("click", ".apply-scholarship", function () {
-        const scholarshipId = $(this).data("id");
-        console.log("Applying for scholarship ID:", scholarshipId);
-
-        if (confirm("Are you sure you want to apply to this scholarship?")) {
-            $.ajax({
-                url: `/applyScholarship/${scholarshipId}`,
-                type: "POST",
-                success: function (response) {
-                    alert(response.msg);
-                },
-                error: function (error) {
-                    console.error("Error:", error);
-                }
-            });
-        }
-    });
-}
-
-function saveScholarship() {
-    $(document).on("click", ".save-scholarship", function () {
-        const scholarshipId = $(this).data("id");
-        console.log("saving for scholarship ID:", scholarshipId);
-
-        if (confirm("Are you sure you want to save this scholarship?")) {
-            $.ajax({
-                url: `/saveScholarship/${scholarshipId}`,
-                type: "POST",
-                success: function (response) {
-                    alert(response.msg);
-                },
-                error: function (error) {
-                    console.error("Error:", error);
-                }
-            });
-        }
-    });
-}
-
-function reportScholarship() {
-    $(document).on("click", ".report-scholarship", function () {
-        const scholarshipId = $(this).data("id");
-        console.log("reporting for scholarship ID:", scholarshipId);
-
-        if (confirm("Are you sure you want to report this scholarship?")) {
-            $.ajax({
-                url: `/reportScholarship/${scholarshipId}`,
-                type: "POST",
-                success: function (response) {
-                    alert(response.msg);
-                },
-                error: function (error) {
-                    console.error("Error:", error);
-                }
-            });
-        }
     });
 }
 

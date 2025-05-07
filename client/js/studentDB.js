@@ -105,7 +105,9 @@ function searchScholarships() {
                             <h3>${scholarship.title}</h3>
                             <h4>$${scholarship.amount}</h4>
                             <p>${scholarship.description}</p>
+                            <button class="btn btn-warning save-scholarship" data-id="${scholarship.scholarship_id}">Save</button>
                             <button class="btn btn-success apply-scholarship" data-id="${scholarship.scholarship_id}">Apply</button>
+                            <button class="btn btn-danger report-scholarship" data-id="${scholarship.scholarship_id}">Report</button>
                         </div>
                     `);
                     container.append(card);

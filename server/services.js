@@ -429,7 +429,7 @@ var services = function(app) {
 
             const scholarshipIDs = [];
             results.forEach(result => {
-                scholarshipIDs.push(result.application_id);
+                scholarshipIDs.push(result.scholarship_id);
             });
 
             if (scholarshipIDs.length == 0) {
